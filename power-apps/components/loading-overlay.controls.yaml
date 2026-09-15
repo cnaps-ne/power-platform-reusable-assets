@@ -1,0 +1,24 @@
+- conLoadingOverlay:
+    Control: GroupContainer@1.5.0
+    Variant: AutoLayout
+    Properties:
+      Height: =Parent.Height
+      Width: =Parent.Width
+      LayoutDirection: =LayoutDirection.Vertical
+      LayoutAlignItems: =LayoutAlignItems.Center
+      LayoutJustifyContent: =LayoutJustifyContent.Center
+      Fill: =RGBA(255,255,255,0.82)
+      Visible: =varShowLoading
+    Children:
+      - icoLoading:
+          Control: Classic/Icon@2.5.0
+          Properties:
+            Icon: =Icon.Sync
+            Color: =RGBA(0,120,212,1)
+            AccessibleLabel: ="Loading"
+      - lblLoading:
+          Control: Label@2.5.1
+          Properties:
+            Text: ="Loading work items…"
+            Align: =Align.Center
+            Live: =Live.Assertive

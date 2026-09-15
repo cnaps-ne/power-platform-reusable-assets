@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "div",
+  "style": {"position":"relative","height":"20px","width":"100%","min-width":"90px","background-color":"#edebe9","border-radius":"10px","overflow":"hidden"},
+  "children": [
+    {"elmType":"div","style":{"height":"100%","width":"=if(@currentField > 1, @currentField + '%', (@currentField * 100) + '%')","background-color":"=if(@currentField >= 1 || @currentField == 100,'#107C10','#0078D4')"}},
+    {"elmType":"span","txtContent":"=if(@currentField > 1, @currentField + '%', (@currentField * 100) + '%')","style":{"position":"absolute","left":"8px","top":"1px","font-size":"12px","font-weight":"600"}}
+  ]
+}

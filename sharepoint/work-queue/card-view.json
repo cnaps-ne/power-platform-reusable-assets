@@ -1,0 +1,19 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/view-formatting.schema.json",
+  "tileProps": {
+    "width": "320",
+    "height": "190",
+    "hideSelection": false,
+    "formatter": {
+      "elmType": "button",
+      "customRowAction": {"action":"defaultClick"},
+      "style": {"width":"304px","height":"174px","margin":"8px","padding":"14px","text-align":"left","border":"1px solid #edebe9","border-left":"=if([$Priority] == 'Critical','5px solid #a4262c',if([$Priority] == 'High','5px solid #d83b01','5px solid #0078d4'))","border-radius":"8px","background-color":"white","box-shadow":"0 2px 6px rgba(0,0,0,.08)","cursor":"pointer"},
+      "children": [
+        {"elmType":"div","style":{"display":"flex","justify-content":"space-between","margin-bottom":"10px"},"children":[{"elmType":"span","txtContent":"[$RequestRef]","attributes":{"class":"ms-fontWeight-semibold ms-fontColor-themePrimary"}},{"elmType":"span","txtContent":"[$Status]","attributes":{"class":"ms-fontSize-12"}}]},
+        {"elmType":"div","txtContent":"[$Title]","attributes":{"class":"ms-fontSize-16 ms-fontWeight-semibold"},"style":{"height":"42px","overflow":"hidden"}},
+        {"elmType":"div","txtContent":"=[$RequestType] + ' · ' + [$Priority]","attributes":{"class":"ms-fontSize-12 ms-fontColor-neutralSecondary"},"style":{"margin-top":"6px"}},
+        {"elmType":"div","style":{"display":"flex","align-items":"center","justify-content":"space-between","margin-top":"18px","border-top":"1px solid #edebe9","padding-top":"10px"},"children":[{"elmType":"span","txtContent":"=if([$AssignedTo.title],[$AssignedTo.title],'Unassigned')"},{"elmType":"span","txtContent":"=if([$DueDate] == '', 'No due date', toLocaleDateString([$DueDate]))","attributes":{"class":"=if([$IsOverdue] == true,'ms-fontColor-redDark ms-fontWeight-semibold','ms-fontColor-neutralSecondary')"}}]}
+      ]
+    }
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "span",
+  "txtContent": "@currentField",
+  "attributes": {"class":"=if(@currentField == 'High' || @currentField == 'Critical','sp-field-severity--blocked',if(@currentField == 'Medium','sp-field-severity--warning','sp-field-severity--good'))"},
+  "style": {"padding":"4px 8px","border-radius":"12px","font-weight":"600"}
+}

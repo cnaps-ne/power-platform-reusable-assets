@@ -1,0 +1,90 @@
+# Paste into a blank responsive screen. Replace the content placeholder.
+- conAppShell:
+    Control: GroupContainer@1.5.0
+    Variant: AutoLayout
+    Properties:
+      Height: =Parent.Height
+      Width: =Parent.Width
+      LayoutDirection: =LayoutDirection.Vertical
+      LayoutGap: =0
+      Fill: =RGBA(247,248,250,1)
+    Children:
+      - conShellHeader:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            FillPortions: =0
+            Height: =64
+            LayoutDirection: =LayoutDirection.Horizontal
+            LayoutAlignItems: =LayoutAlignItems.Center
+            PaddingLeft: =20
+            PaddingRight: =20
+            Fill: =RGBA(255,255,255,1)
+          Children:
+            - lblShellTitle:
+                Control: Label@2.5.1
+                Properties:
+                  Text: ="Work Management"
+                  FontWeight: =FontWeight.Semibold
+                  Size: =18
+                  FillPortions: =1
+            - lblShellUser:
+                Control: Label@2.5.1
+                Properties:
+                  Text: =User().FullName
+                  Align: =Align.Right
+                  Width: =220
+      - conShellBody:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            LayoutDirection: =LayoutDirection.Horizontal
+            LayoutGap: =0
+            FillPortions: =1
+          Children:
+            - conShellNavigation:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  FillPortions: =0
+                  Width: =If(App.Width < 768,0,240)
+                  Visible: =App.Width >= 768
+                  LayoutDirection: =LayoutDirection.Vertical
+                  PaddingTop: =12
+                  PaddingLeft: =12
+                  PaddingRight: =12
+                  Fill: =RGBA(255,255,255,1)
+                Children:
+                  - galShellNavigation:
+                      Control: Gallery@2.15.0
+                      Variant: BrowseLayout_Vertical_OneTextVariant_ver5.0
+                      Properties:
+                        Items: =SortByColumns(Filter(colNavigation,Visible),"SortOrder",SortOrder.Ascending)
+                        TemplateSize: =44
+                      Children:
+                        - btnShellNavigationItem:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              Text: =ThisItem.Title
+                              OnSelect: =Navigate(ThisItem.Screen,ScreenTransition.None)
+                              Width: =Parent.TemplateWidth
+                              Height: =40
+                              Fill: =If(App.ActiveScreen=ThisItem.Screen,RGBA(230,240,250,1),RGBA(0,0,0,0))
+                              Color: =RGBA(32,31,30,1)
+                              BorderThickness: =0
+            - conShellContent:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  FillPortions: =1
+                  LayoutDirection: =LayoutDirection.Vertical
+                  PaddingTop: =20
+                  PaddingBottom: =20
+                  PaddingLeft: =20
+                  PaddingRight: =20
+                Children:
+                  - lblShellContentPlaceholder:
+                      Control: Label@2.5.1
+                      Properties:
+                        Text: ="Replace this label with the screen content container"
+                        Color: =RGBA(96,94,92,1)

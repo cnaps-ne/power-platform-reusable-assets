@@ -1,0 +1,8 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "button",
+  "txtContent": "Run action",
+  "customRowAction": {"action":"executeFlow","actionParams":"{\"id\": \"FLOW_ID\"}"},
+  "attributes": {"class":"ms-fontColor-themePrimary ms-bgColor-neutralLighter--hover","title":"Run the configured Power Automate flow"},
+  "style": {"border":"none","background-color":"transparent","cursor":"pointer","padding":"5px 8px"}
+}

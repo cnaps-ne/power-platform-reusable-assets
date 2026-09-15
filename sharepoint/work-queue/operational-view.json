@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/row-formatting.schema.json",
+  "hideSelection": false,
+  "additionalRowClass": "=if([$IsOverdue] == true && [$Status] != 'Closed' && [$Status] != 'Resolved','sp-css-backgroundColor-errorBackground50','')",
+  "rowFormatter": {
+    "elmType": "div",
+    "customRowAction": {"action":"defaultClick"},
+    "style": {"display":"grid","grid-template-columns":"120px minmax(220px,2fr) 110px 100px 150px 120px","gap":"12px","align-items":"center","padding":"10px 12px","border-bottom":"1px solid #edebe9","cursor":"pointer"},
+    "children": [
+      {"elmType":"span","txtContent":"[$RequestRef]","attributes":{"class":"ms-fontWeight-semibold ms-fontColor-themePrimary"}},
+      {"elmType":"div","children":[{"elmType":"div","txtContent":"[$Title]","attributes":{"class":"ms-fontWeight-semibold"}},{"elmType":"div","txtContent":"[$RequestType]","attributes":{"class":"ms-fontSize-12 ms-fontColor-neutralSecondary"}}]},
+      {"elmType":"span","txtContent":"[$Status]"},
+      {"elmType":"span","txtContent":"[$Priority]","attributes":{"class":"=if([$Priority] == 'Critical','ms-fontColor-redDark',if([$Priority] == 'High','ms-fontColor-orange',''))"}},
+      {"elmType":"span","txtContent":"=if([$AssignedTo.title],[$AssignedTo.title],'Unassigned')"},
+      {"elmType":"span","txtContent":"=if([$DueDate] == '', '—', toLocaleDateString([$DueDate]))","attributes":{"class":"=if([$IsOverdue] == true,'ms-fontColor-redDark ms-fontWeight-semibold','')"}}
+    ]
+  }
+}

@@ -1,0 +1,32 @@
+- conQueueFilters:
+    Control: GroupContainer@1.5.0
+    Variant: AutoLayout
+    Properties:
+      FillPortions: =0
+      Height: =52
+      LayoutDirection: =LayoutDirection.Horizontal
+      LayoutAlignItems: =LayoutAlignItems.Center
+      LayoutGap: =10
+    Children:
+      - txtQueueSearch:
+          Control: TextInput@0.0.54
+          Properties:
+            Placeholder: ="Search reference or title"
+            AccessibleLabel: ="Search work queue"
+            Width: =Min(360,Parent.Width*0.45)
+      - ddQueueStatus:
+          Control: DropDown@0.0.45
+          Properties:
+            Items: =["All","New","Assigned","In Progress","Waiting","Resolved","Closed"]
+            AccessibleLabel: ="Filter by status"
+            Width: =160
+      - btnClearQueueFilters:
+          Control: Classic/Button@2.2.0
+          Properties:
+            Text: ="Clear"
+            OnSelect: =Reset(txtQueueSearch);Reset(ddQueueStatus)
+            Width: =80
+            Height: =36
+            Fill: =RGBA(0,0,0,0)
+            Color: =RGBA(0,120,212,1)
+            BorderThickness: =0

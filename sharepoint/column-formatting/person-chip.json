@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "div",
+  "style": {"display":"flex","align-items":"center","gap":"7px","min-height":"28px"},
+  "children": [
+    {"elmType":"img","style":{"width":"24px","height":"24px","border-radius":"50%","display":"=if(@currentField.email,'block','none')"},"attributes":{"src":"=getUserImage(@currentField.email,'small')"},"defaultHoverField":"@currentField"},
+    {"elmType":"span","txtContent":"=if(@currentField.title,@currentField.title,'Unassigned')","attributes":{"class":"=if(@currentField.title,'ms-fontColor-neutralPrimary','ms-fontColor-neutralTertiary')"}}
+  ]
+}

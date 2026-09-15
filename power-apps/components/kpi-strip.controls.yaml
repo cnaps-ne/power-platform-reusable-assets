@@ -1,0 +1,38 @@
+# Replace the Items table with a collection when KPIs are calculated centrally.
+- galKpiStrip:
+    Control: Gallery@2.15.0
+    Variant: BrowseLayout_Horizontal_TwoTextOneImageVariant_ver5.0
+    Properties:
+      Items: =Table({Label:"Open",Value:CountRows(Filter(colWorkQueue,Status<>"Closed"))},{Label:"Unassigned",Value:CountRows(Filter(colWorkQueue,IsBlank(AssignedTo)))},{Label:"Overdue",Value:CountRows(Filter(colWorkQueue,IsOverdue))},{Label:"Due today",Value:CountRows(Filter(colWorkQueue,DateValue(DueDate)=Today()))})
+      TemplateSize: =210
+      Height: =96
+      AccessibleLabel: ="Queue metrics"
+    Children:
+      - conKpiCard:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            Width: =Parent.TemplateWidth-10
+            Height: =88
+            LayoutDirection: =LayoutDirection.Vertical
+            PaddingTop: =12
+            PaddingBottom: =12
+            PaddingLeft: =14
+            PaddingRight: =14
+            Fill: =RGBA(255,255,255,1)
+            RadiusTopLeft: =10
+            RadiusTopRight: =10
+            RadiusBottomLeft: =10
+            RadiusBottomRight: =10
+          Children:
+            - lblKpiValue:
+                Control: Label@2.5.1
+                Properties:
+                  Text: =Text(ThisItem.Value)
+                  FontWeight: =FontWeight.Bold
+                  Size: =20
+            - lblKpiLabel:
+                Control: Label@2.5.1
+                Properties:
+                  Text: =ThisItem.Label
+                  Color: =RGBA(96,94,92,1)

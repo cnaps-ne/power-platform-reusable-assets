@@ -1,0 +1,18 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/row-formatting.schema.json",
+  "hideSelection": false,
+  "additionalRowClass": "=if([$RiskRating] == 'High' || [$RiskRating] == 'Critical','sp-css-backgroundColor-errorBackground50','')",
+  "rowFormatter": {
+    "elmType": "div",
+    "customRowAction": {"action":"defaultClick"},
+    "style": {"display":"grid","grid-template-columns":"110px minmax(220px,2fr) 120px 110px 110px 90px","gap":"12px","align-items":"center","padding":"11px 12px","border-bottom":"1px solid #edebe9","cursor":"pointer"},
+    "children": [
+      {"elmType":"span","txtContent":"[$DeliveryRef]","attributes":{"class":"ms-fontWeight-semibold ms-fontColor-themePrimary"}},
+      {"elmType":"div","children":[{"elmType":"div","txtContent":"[$Title]","attributes":{"class":"ms-fontWeight-semibold"}},{"elmType":"div","txtContent":"=[$DeliveryType] + ' · ' + if([$Owner.title],[$Owner.title],'No owner')","attributes":{"class":"ms-fontSize-12 ms-fontColor-neutralSecondary"}}]},
+      {"elmType":"span","txtContent":"[$Status]"},
+      {"elmType":"span","txtContent":"[$ApprovalStatus]","attributes":{"class":"=if([$ApprovalStatus] == 'Approved','ms-fontColor-green',if([$ApprovalStatus] == 'Rejected','ms-fontColor-redDark','ms-fontColor-orange'))"}},
+      {"elmType":"span","txtContent":"[$RiskRating]","attributes":{"class":"=if([$RiskRating] == 'High' || [$RiskRating] == 'Critical','ms-fontColor-redDark ms-fontWeight-semibold','')"}},
+      {"elmType":"span","txtContent":"=if([$TargetDate] == '', '—', toLocaleDateString([$TargetDate]))"}
+    ]
+  }
+}

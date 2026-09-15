@@ -1,0 +1,64 @@
+- conRequestForm:
+    Control: GroupContainer@1.5.0
+    Variant: AutoLayout
+    Properties:
+      Width: =Min(760,Parent.Width)
+      LayoutDirection: =LayoutDirection.Vertical
+      LayoutGap: =14
+      PaddingTop: =20
+      PaddingBottom: =20
+      PaddingLeft: =20
+      PaddingRight: =20
+      Fill: =RGBA(255,255,255,1)
+      RadiusTopLeft: =12
+      RadiusTopRight: =12
+      RadiusBottomLeft: =12
+      RadiusBottomRight: =12
+    Children:
+      - lblRequestFormTitle:
+          Control: Label@2.5.1
+          Properties:
+            Text: ="Submit a request"
+            FontWeight: =FontWeight.Semibold
+            Size: =20
+      - ddRequestType:
+          Control: DropDown@0.0.45
+          Properties:
+            Items: =SortByColumns(Filter(colRequestTypes,Active),"SortOrder",SortOrder.Ascending)
+            AccessibleLabel: ="Request type"
+      - txtRequestTitle:
+          Control: TextInput@0.0.54
+          Properties:
+            Placeholder: ="Short summary"
+            AccessibleLabel: ="Request title"
+      - txtRequestDescription:
+          Control: Classic/TextInput@2.3.2
+          Properties:
+            HintText: ="Describe what you need and include useful context"
+            Mode: =TextMode.MultiLine
+            Height: =140
+            AccessibleLabel: ="Request description"
+      - conRequestFormActions:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            FillPortions: =0
+            Height: =44
+            LayoutDirection: =LayoutDirection.Horizontal
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutGap: =10
+          Children:
+            - btnCancelRequest:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Text: ="Cancel"
+                  Fill: =RGBA(0,0,0,0)
+                  Color: =RGBA(0,120,212,1)
+                  OnSelect: =Back()
+            - btnSubmitRequest:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Text: ="Submit"
+                  DisplayMode: =If(IsBlank(Trim(txtRequestTitle.Text)) || IsBlank(ddRequestType.Selected),DisplayMode.Disabled,DisplayMode.Edit)
+                  AccessibleLabel: ="Submit request"
+                  OnSelect: =Notify("Connect this button to the solution submission formula",NotificationType.Information)

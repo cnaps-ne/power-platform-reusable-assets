@@ -1,0 +1,10 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "div",
+  "style": {"display":"flex","align-items":"center","gap":"6px","font-weight":"=if(@currentField <= @now && [$Status] != 'Closed' && [$Status] != 'Resolved','600','400')"},
+  "attributes": {"class":"=if(@currentField <= @now && [$Status] != 'Closed' && [$Status] != 'Resolved','ms-fontColor-redDark',if(@currentField <= addDays(@now,2),'ms-fontColor-orange','ms-fontColor-neutralPrimary'))"},
+  "children": [
+    {"elmType":"span","attributes":{"iconName":"=if(@currentField <= @now && [$Status] != 'Closed' && [$Status] != 'Resolved','Warning','Calendar')"}},
+    {"elmType":"span","txtContent":"=if(@currentField == '', 'No due date', toLocaleDateString(@currentField))"}
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/row-formatting.schema.json",
+  "hideSelection": true,
+  "rowFormatter": {
+    "elmType": "div",
+    "customRowAction": {"action":"defaultClick"},
+    "style": {"display":"flex","align-items":"center","justify-content":"space-between","gap":"16px","padding":"12px 14px","margin":"4px 0","border":"1px solid #edebe9","border-radius":"8px","cursor":"pointer"},
+    "children": [
+      {"elmType":"div","style":{"min-width":"0","flex-grow":"1"},"children":[{"elmType":"div","txtContent":"=[$RequestRef] + ' · ' + [$Title]","attributes":{"class":"ms-fontWeight-semibold"},"style":{"overflow":"hidden","text-overflow":"ellipsis","white-space":"nowrap"}},{"elmType":"div","txtContent":"=[$RequestType] + ' · Submitted ' + toLocaleDateString([$Created])","attributes":{"class":"ms-fontSize-12 ms-fontColor-neutralSecondary"}}]},
+      {"elmType":"span","txtContent":"[$Status]","attributes":{"class":"ms-fontColor-themePrimary ms-fontWeight-semibold"}},
+      {"elmType":"span","attributes":{"iconName":"ChevronRight","class":"ms-fontColor-neutralSecondary"}}
+    ]
+  }
+}

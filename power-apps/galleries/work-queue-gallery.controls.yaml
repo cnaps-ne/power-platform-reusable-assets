@@ -1,0 +1,77 @@
+# Requires colWorkQueue and optionally txtQueueSearch/ddQueueStatus from filter-bar.controls.yaml.
+- galWorkQueue:
+    Control: Gallery@2.15.0
+    Variant: BrowseLayout_Vertical_ThreeTextVariant_ver5.0
+    Properties:
+      Items: |-
+        =SortByColumns(
+            Filter(
+                colWorkQueue,
+                (IsBlank(Trim(txtQueueSearch.Text)) || Lower(Trim(txtQueueSearch.Text)) in Lower(RequestRef & " " & Title)) &&
+                (ddQueueStatus.Selected.Value="All" || Status=ddQueueStatus.Selected.Value)
+            ),
+            "Created",
+            SortOrder.Descending
+        )
+      TemplateSize: =74
+      AccessibleLabel: ="Work queue"
+    Children:
+      - btnQueueRow:
+          Control: Classic/Button@2.2.0
+          Properties:
+            Text: =""
+            OnSelect: =Set(varSelectedWorkItem,ThisItem)
+            Width: =Parent.TemplateWidth
+            Height: =70
+            Fill: =If(ThisItem.IsOverdue,RGBA(253,237,237,1),RGBA(255,255,255,1))
+            HoverFill: =RGBA(245,245,245,1)
+            BorderColor: =RGBA(237,235,233,1)
+            BorderThickness: =1
+            AccessibleLabel: ="Open " & ThisItem.RequestRef & ", " & ThisItem.Title
+      - lblQueueReference:
+          Control: Label@2.5.1
+          Properties:
+            Text: =ThisItem.RequestRef
+            FontWeight: =FontWeight.Semibold
+            Color: =RGBA(0,120,212,1)
+            X: =12
+            Y: =10
+            Width: =110
+      - lblQueueTitle:
+          Control: Label@2.5.1
+          Properties:
+            Text: =ThisItem.Title
+            X: =122
+            Y: =8
+            Width: =Max(180,Parent.TemplateWidth-590)
+            FontWeight: =FontWeight.Semibold
+      - lblQueueStatus:
+          Control: Label@2.5.1
+          Properties:
+            Text: =ThisItem.Status
+            X: =Parent.TemplateWidth-450
+            Y: =8
+            Width: =110
+      - lblQueuePriority:
+          Control: Label@2.5.1
+          Properties:
+            Text: =ThisItem.Priority
+            Color: =If(ThisItem.Priority="Critical",RGBA(164,38,44,1),If(ThisItem.Priority="High",RGBA(216,59,1,1),RGBA(96,94,92,1)))
+            X: =Parent.TemplateWidth-330
+            Y: =8
+            Width: =90
+      - lblQueueAssignee:
+          Control: Label@2.5.1
+          Properties:
+            Text: =Coalesce(ThisItem.AssignedTo.DisplayName,"Unassigned")
+            X: =Parent.TemplateWidth-230
+            Y: =8
+            Width: =140
+      - lblQueueDue:
+          Control: Label@2.5.1
+          Properties:
+            Text: =If(IsBlank(ThisItem.DueDate),"—",Text(ThisItem.DueDate,"dd mmm"))
+            Color: =If(ThisItem.IsOverdue,RGBA(164,38,44,1),RGBA(96,94,92,1))
+            X: =Parent.TemplateWidth-85
+            Y: =8
+            Width: =75

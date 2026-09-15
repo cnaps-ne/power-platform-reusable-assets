@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "div",
+  "style": {"display":"flex","align-items":"center","gap":"6px"},
+  "children": [
+    {"elmType":"span","attributes":{"iconName":"=if(@currentField == 'Approved','Accept',if(@currentField == 'Rejected','Cancel',if(@currentField == 'Pending','Clock','CircleRing')))","class":"=if(@currentField == 'Approved','ms-fontColor-green',if(@currentField == 'Rejected','ms-fontColor-redDark',if(@currentField == 'Pending','ms-fontColor-orange','ms-fontColor-neutralSecondary')))"}},
+    {"elmType":"span","txtContent":"@currentField"}
+  ]
+}

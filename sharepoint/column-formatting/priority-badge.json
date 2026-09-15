@@ -1,0 +1,9 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "div",
+  "style": {"display":"flex","align-items":"center","gap":"6px","font-weight":"600"},
+  "children": [
+    {"elmType":"span","attributes":{"iconName":"=if(@currentField == 'Critical','WarningSolid',if(@currentField == 'High','Important','CircleRing'))","class":"=if(@currentField == 'Critical','ms-fontColor-redDark',if(@currentField == 'High','ms-fontColor-orange','ms-fontColor-neutralSecondary'))"}},
+    {"elmType":"span","txtContent":"@currentField"}
+  ]
+}

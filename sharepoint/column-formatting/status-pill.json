@@ -1,0 +1,15 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/sp/v2/column-formatting.schema.json",
+  "elmType": "span",
+  "txtContent": "@currentField",
+  "attributes": {
+    "class": "=if(@currentField == 'Closed' || @currentField == 'Resolved', 'sp-field-severity--good', if(@currentField == 'In Progress' || @currentField == 'Assigned', 'sp-field-severity--low', if(@currentField == 'Waiting', 'sp-field-severity--warning', if(@currentField == 'Cancelled', 'sp-field-severity--blocked', 'sp-field-severity--good'))))"
+  },
+  "style": {
+    "display": "inline-block",
+    "padding": "4px 10px",
+    "border-radius": "999px",
+    "font-weight": "600",
+    "white-space": "nowrap"
+  }
+}

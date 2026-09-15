@@ -1,0 +1,43 @@
+- conSidePanelOverlay:
+    Control: GroupContainer@1.5.0
+    Variant: AutoLayout
+    Properties:
+      Height: =Parent.Height
+      Width: =Parent.Width
+      LayoutDirection: =LayoutDirection.Horizontal
+      LayoutJustifyContent: =LayoutJustifyContent.End
+      Fill: =RGBA(0,0,0,0.35)
+      Visible: =varShowPanel
+    Children:
+      - conSidePanel:
+          Control: GroupContainer@1.5.0
+          Variant: AutoLayout
+          Properties:
+            FillPortions: =0
+            Width: =Min(520,Parent.Width)
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutGap: =12
+            PaddingTop: =20
+            PaddingBottom: =20
+            PaddingLeft: =20
+            PaddingRight: =20
+            Fill: =RGBA(255,255,255,1)
+          Children:
+            - btnCloseSidePanel:
+                Control: Classic/Icon@2.5.0
+                Properties:
+                  Icon: =Icon.Cancel
+                  OnSelect: =Set(varShowPanel,false)
+                  AccessibleLabel: ="Close panel"
+                  AlignInContainer: =AlignInContainer.End
+            - lblSidePanelTitle:
+                Control: Label@2.5.1
+                Properties:
+                  Text: ="Work item details"
+                  FontWeight: =FontWeight.Semibold
+                  Size: =18
+            - lblSidePanelPlaceholder:
+                Control: Label@2.5.1
+                Properties:
+                  Text: ="Insert a display form, activity feed or action controls here."
+                  Color: =RGBA(96,94,92,1)
