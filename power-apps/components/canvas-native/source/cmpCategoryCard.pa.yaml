@@ -1,0 +1,239 @@
+# Canvas component source. Review and test in Power Apps Studio before production use.
+ComponentDefinitions:
+  cmpCategoryCard:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      TitleText:
+        PropertyKind: Input
+        DisplayName: TitleText
+        Description: Category title.
+        DataType: Text
+        Default: |-
+          ="IT"
+      IconName:
+        PropertyKind: Input
+        DisplayName: IconName
+        Description: An nfIconLibrary name.
+        DataType: Text
+        Default: |-
+          ="IT"
+      DescriptionText:
+        PropertyKind: Input
+        DisplayName: DescriptionText
+        Description: Short description.
+        DataType: Text
+        Default: |-
+          ="Support, access and equipment"
+      ServiceCount:
+        PropertyKind: Input
+        DisplayName: ServiceCount
+        Description: Loaded service count.
+        DataType: Number
+        Default: |-
+          =0
+      OnOpen:
+        PropertyKind: Event
+        DisplayName: OnOpen
+        Description: Fires when Explore services is selected; same Event shape as cmpStepper.OnStepSelect.
+        ReturnType: None
+        Default: |-
+          =false
+    Properties:
+      Width: |-
+        =330
+      Height: |-
+        =286
+    Children:
+      - cmpCategoryCardBox:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =Parent.Height
+            Fill: |-
+              =nfThemeSurface
+            BorderColor: |-
+              =nfThemeBorder
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =18
+            RadiusTopRight: |-
+              =18
+            RadiusBottomLeft: |-
+              =18
+            RadiusBottomRight: |-
+              =18
+          Children:
+            - cmpCategoryCardIcon:
+                Control: HtmlViewer@2.1.0
+                Properties:
+                  X: |-
+                    =20
+                  Y: |-
+                    =20
+                  Width: |-
+                    =34
+                  Height: |-
+                    =34
+                  HtmlText: |-
+                    =fnIconHtml(Coalesce(LookUp(nfIconLibrary,Name=cmpCategoryCard.IconName,Name),"General"),nfThemePrimary,30)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+            - cmpCategoryCardTitle:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpCategoryCard.TitleText
+                  X: |-
+                    =20
+                  Y: |-
+                    =72
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =32
+                  Size: |-
+                    =17
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =nfThemeText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpCategoryCardDescription:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpCategoryCard.DescriptionText
+                  X: |-
+                    =20
+                  Y: |-
+                    =116
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =55
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeMutedText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpCategoryCardCount:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =Text(cmpCategoryCard.ServiceCount) & " services"
+                  X: |-
+                    =20
+                  Y: |-
+                    =186
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =23
+                  Size: |-
+                    =10
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeMutedText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpCategoryCardOpen:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Text: |-
+                    ="Explore services"
+                  OnSelect: |-
+                    =cmpCategoryCard.OnOpen()
+                  X: |-
+                    =20
+                  Y: |-
+                    =228
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =40
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Fill: |-
+                    =nfThemeSurface
+                  Color: |-
+                    =nfThemeText
+                  BorderColor: |-
+                    =nfThemeBorder
+                  BorderThickness: |-
+                    =1
+                  HoverFill: |-
+                    =ColorFade(nfThemeSurface,If(gblDarkMode,12%,-5%))
+                  HoverColor: |-
+                    =nfThemeText
+                  PressedFill: |-
+                    =ColorFade(nfThemePrimary,-10%)
+                  PressedColor: |-
+                    =ColorValue("#241600")
+                  FocusedBorderThickness: |-
+                    =3
+                  RadiusTopLeft: |-
+                    =12
+                  RadiusTopRight: |-
+                    =12
+                  RadiusBottomLeft: |-
+                    =12
+                  RadiusBottomRight: |-
+                    =12

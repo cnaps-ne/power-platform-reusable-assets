@@ -1,0 +1,192 @@
+# Canvas component source. Review and test in Power Apps Studio before production use.
+ComponentDefinitions:
+  cmpActivityItem:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      ActivityType:
+        PropertyKind: Input
+        DisplayName: ActivityType
+        Description: Comment, Internal Note, Email, Status Update, Assignment Update, Approval Note or System Note.
+        DataType: Text
+        Default: |-
+          ="Comment"
+      BodyText:
+        PropertyKind: Input
+        DisplayName: BodyText
+        Description: Pass ActivityText from the source connection.
+        DataType: Text
+        Default: |-
+          ="Activity text"
+      AuthorText:
+        PropertyKind: Input
+        DisplayName: AuthorText
+        Description: Display name only.
+        DataType: Text
+        Default: |-
+          ="Author"
+      WhenText:
+        PropertyKind: Input
+        DisplayName: WhenText
+        Description: Preformatted timestamp.
+        DataType: Text
+        Default: |-
+          ="Today"
+      IsInternal:
+        PropertyKind: Input
+        DisplayName: IsInternal
+        Description: Controls the internal marker, not authorisation.
+        DataType: Boolean
+        Default: |-
+          =false
+    Properties:
+      Width: |-
+        =580
+      Height: |-
+        =174
+    Children:
+      - cmpActivityItemBox:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =Parent.Height
+            Fill: |-
+              =nfThemeSurface
+            BorderColor: |-
+              =nfThemeBorder
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =18
+            RadiusTopRight: |-
+              =18
+            RadiusBottomLeft: |-
+              =18
+            RadiusBottomRight: |-
+              =18
+          Children:
+            - cmpActivityItemIcon:
+                Control: HtmlViewer@2.1.0
+                Properties:
+                  X: |-
+                    =18
+                  Y: |-
+                    =18
+                  Width: |-
+                    =30
+                  Height: |-
+                    =30
+                  HtmlText: |-
+                    =fnIconHtml(Coalesce(LookUp(nfIconLibrary,Name=Coalesce(LookUp(nfActivityTypes,ActivityType=cmpActivityItem.ActivityType,IconName),"Info"),Name),"General"),nfThemePrimary,26)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+            - cmpActivityItemType:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpActivityItem.ActivityType & If(cmpActivityItem.IsInternal,"  ·  Internal","")
+                  X: |-
+                    =64
+                  Y: |-
+                    =15
+                  Width: |-
+                    =Parent.Width-82
+                  Height: |-
+                    =24
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =nfThemeText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpActivityItemBody:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =PlainText(cmpActivityItem.BodyText)
+                  X: |-
+                    =64
+                  Y: |-
+                    =51
+                  Width: |-
+                    =Parent.Width-82
+                  Height: |-
+                    =67
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpActivityItemBy:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpActivityItem.AuthorText & "  ·  " & cmpActivityItem.WhenText
+                  X: |-
+                    =64
+                  Y: |-
+                    =133
+                  Width: |-
+                    =Parent.Width-82
+                  Height: |-
+                    =22
+                  Size: |-
+                    =9
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeMutedText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true

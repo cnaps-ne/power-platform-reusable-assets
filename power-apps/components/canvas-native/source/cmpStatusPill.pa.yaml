@@ -1,0 +1,95 @@
+# Canvas component source. Review and test in Power Apps Studio before production use.
+ComponentDefinitions:
+  cmpStatusPill:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      StatusValue:
+        PropertyKind: Input
+        DisplayName: StatusValue
+        Description: Authoritative request Status.
+        DataType: Text
+        Default: |-
+          ="Assigned"
+      RequesterView:
+        PropertyKind: Input
+        DisplayName: RequesterView
+        Description: Show derived progress for requesters.
+        DataType: Boolean
+        Default: |-
+          =true
+      ProgressValue:
+        PropertyKind: Output
+        DisplayName: ProgressValue
+        Description: Current ProgressValue
+        DataType: Text
+    Properties:
+      Width: |-
+        =190
+      Height: |-
+        =38
+      ProgressValue: |-
+        =Coalesce(LookUp(nfStatuses,Status=cmpStatusPill.StatusValue,Progress),"Received")
+    Children:
+      - cmpStatusPillBox:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =Parent.Height
+            Fill: |-
+              =If(gblDarkMode,ColorFade(Coalesce(LookUp(nfProgress,Progress=Coalesce(LookUp(nfStatuses,Status=cmpStatusPill.StatusValue,Progress),"Received"),TextColour),nfThemePrimary),-78%),Coalesce(LookUp(nfProgress,Progress=Coalesce(LookUp(nfStatuses,Status=cmpStatusPill.StatusValue,Progress),"Received"),FillColour),nfThemeSurface))
+            BorderColor: |-
+              =nfThemeBorder
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =18
+            RadiusTopRight: |-
+              =18
+            RadiusBottomLeft: |-
+              =18
+            RadiusBottomRight: |-
+              =18
+          Children:
+            - cmpStatusPillText:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =If(cmpStatusPill.RequesterView,Coalesce(LookUp(nfStatuses,Status=cmpStatusPill.StatusValue,Progress),"Received"),cmpStatusPill.StatusValue)
+                  X: |-
+                    =12
+                  Y: |-
+                    =4
+                  Width: |-
+                    =Parent.Width-24
+                  Height: |-
+                    =Parent.Height-8
+                  Size: |-
+                    =10
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =ColorFade(Coalesce(LookUp(nfProgress,Progress=Coalesce(LookUp(nfStatuses,Status=cmpStatusPill.StatusValue,Progress),"Received"),TextColour),nfThemePrimary),If(gblDarkMode,65%,-45%))
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+                  Align: |-
+                    =Align.Center

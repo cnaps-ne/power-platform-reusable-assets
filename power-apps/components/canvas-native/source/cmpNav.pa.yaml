@@ -1,0 +1,308 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+#
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+#
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+ComponentDefinitions:
+  cmpNav:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      Configuration:
+        PropertyKind: Input
+        DisplayName: Configuration
+        Description: A custom property
+        DataType: Record
+        Default: |-
+          ={LogoPadding: 20,HtmlContrast:1,HtmlFade:0,LogoPosition:"Fill"}
+      Menu:
+        PropertyKind: Input
+        DisplayName: Menu
+        Description: A custom property
+        DataType: Table
+        Default: =nfNavMenu
+    Properties:
+      Height: =App.Height
+      Width: =nfNavWidth
+    Children:
+      - conNav:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            DropShadow: =DropShadow.ExtraBold
+            Fill: =nfThemeSurface
+            Height: =Parent.Height
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =Parent.Width
+          Children:
+            - htmlNavBackground:
+                Control: HtmlViewer@2.1.0
+                Properties:
+                  DisabledBorderColor: =RGBA(161, 159, 157, 1)
+                  Font: =Font.'Segoe UI'
+                  Height: =Parent.Height+2
+                  HtmlText: =fnSurfaceGradient(nfThemeSurface,cmpNav.Configuration.HtmlContrast,cmpNav.Configuration.HtmlContrast,cmpNav.Configuration.HtmlFade)
+                  Width: =Parent.Width
+            - conNavItems:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  Height: =Parent.Height
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Vertical
+                  Width: =Parent.Width
+                Children:
+                  - htmlAppTitle:
+                      Control: HtmlViewer@2.1.0
+                      Properties:
+                        DisabledBorderColor: =RGBA(161, 159, 157, 1)
+                        Font: =nfAppFont
+                        Height: =nfHeaderHeight
+                        HtmlText: |-
+                          =$"<div style='
+                              background: linear-gradient(118deg, {Substitute(JSON(ColorFade(nfThemePrimary,If(gblDarkMode,60%,-40%))),"""","")}, {nfThemePrimaryText} 80%);
+                              background-clip: text;
+                              -webkit-background-clip: text;
+                              -moz-background-clip: text;
+                              -webkit-text-fill-color: transparent;
+                              -moz-text-fill-color: transparent;
+                              font-weight: 500;
+                              display: flex;
+                              flex-direction: row;
+                              align-items: center;
+                              justify-content: center;
+                              text-align: center;
+                              width: {Self.Width}px;
+                              height: {Self.Height-1}px;
+                          '>{nfAppTitle}</div>"
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0 //nfPagePadding/2
+                        Size: =nfFontSizeHero
+                        Width: =Parent.Width
+                  - galMenu:
+                      Control: Gallery@2.15.0
+                      Variant: VariableHeight
+                      Properties:
+                        BorderColor: =RGBA(245, 245, 245, 1)
+                        Items: |-
+                          =SortByColumns(
+                              Filter(
+                                  cmpNav.Menu,
+                                  !AdminOnly || gblIsAdmin
+                              ),
+                              "SortOrder",
+                              SortOrder.Ascending
+                          )
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        TemplatePadding: =0
+                        TemplateSize: =nfButtonHeight+(nfPagePadding/2)
+                      Children:
+                        - conMenu:
+                            Control: GroupContainer@1.5.0
+                            Variant: ManualLayout
+                            Properties:
+                              DropShadow: |-
+                                =If(
+                                    ThisItem.Screen = App.ActiveScreen || (App.ActiveScreen = 'Request Detail Screen' && ThisItem.Screen = 'My Requests Screen') || (App.ActiveScreen = 'Agent Request Detail Screen' && ThisItem.Screen = 'Queue Screen') || (App.ActiveScreen = 'New Request Screen' && ThisItem.Screen = 'Portal Home Screen'),
+                                    DropShadow.Regular,
+                                    DropShadow.None
+                                )
+                              Height: =Parent.TemplateHeight- (Self.Y*2)
+                              RadiusBottomLeft: =10
+                              RadiusBottomRight: =10
+                              RadiusTopLeft: =10
+                              RadiusTopRight: =10
+                              Visible: =!ThisItem.IsSection
+                              Width: =Parent.TemplateWidth-(Self.X*2)
+                              X: =nfPagePadding/2
+                              Y: =nfPagePadding/3
+                            Children:
+                              - conActiveScreen:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: ManualLayout
+                                  Properties:
+                                    DropShadow: =DropShadow.None
+                                    Height: =Parent.Height
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Visible: =ThisItem.Screen = App.ActiveScreen || (App.ActiveScreen = 'Request Detail Screen' && ThisItem.Screen = 'My Requests Screen') || (App.ActiveScreen = 'Agent Request Detail Screen' && ThisItem.Screen = 'Queue Screen') || (App.ActiveScreen = 'New Request Screen' && ThisItem.Screen = 'Portal Home Screen')
+                                    Width: =Parent.Width
+                                  Children:
+                                    - htmlActiveScreen:
+                                        Control: HtmlViewer@2.1.0
+                                        Properties:
+                                          DisabledBorderColor: =RGBA(161, 159, 157, 1)
+                                          Font: =Font.'Segoe UI'
+                                          Height: =Parent.Height
+                                          HtmlText: =fnSurfaceGradient(nfThemeSurface, 10,10,15)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Width: =Parent.Width
+                                    - recActiveScreen:
+                                        Control: Rectangle@2.3.0
+                                        Properties:
+                                          BorderColor: =RGBA(0, 0, 0, 0)
+                                          BorderStyle: =BorderStyle.None
+                                          DisabledFill: =nfThemePrimary
+                                          DisplayMode: =DisplayMode.Disabled
+                                          Fill: =nfThemePrimary
+                                          FocusedBorderThickness: =4
+                                          Height: =Parent.Height
+                                          HoverFill: =RGBA(0, 120, 212, 1)
+                                          PressedFill: =RGBA(0, 120, 212, 1)
+                                          Visible: =false
+                                          Width: =3
+                              - lblMenuTitle:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 0, 0, 0)
+                                    BorderStyle: =BorderStyle.None
+                                    BorderThickness: =2
+                                    Color: |-
+                                      =If(
+                                          ThisItem.Screen = App.ActiveScreen || (App.ActiveScreen = 'Request Detail Screen' && ThisItem.Screen = 'My Requests Screen') || (App.ActiveScreen = 'Agent Request Detail Screen' && ThisItem.Screen = 'Queue Screen') || (App.ActiveScreen = 'New Request Screen' && ThisItem.Screen = 'Portal Home Screen'),
+                                          nfThemeText,
+                                          nfThemeMutedText
+                                      )
+                                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                    DisabledColor: =RGBA(161, 159, 157, 1)
+                                    FocusedBorderThickness: =4
+                                    Font: =nfAppFont
+                                    FontWeight: |-
+                                      =If(
+                                          ThisItem.Screen = App.ActiveScreen,FontWeight.Semibold,FontWeight.Normal)
+                                    Height: =Parent.Height
+                                    OnSelect: =
+                                    PaddingLeft: =8
+                                    Size: =nfFontSizeCardTitle
+                                    Text: =ThisItem.Title
+                                    Width: =Parent.Width-htmlIcon.X-htmlIcon.Width
+                                    X: =htmlIcon.X+htmlIcon.Width
+                              - htmlIcon:
+                                  Control: HtmlViewer@2.1.0
+                                  Properties:
+                                    DisabledBorderColor: =RGBA(161, 159, 157, 1)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =nfFontSizeCardTitle*2
+                                    HtmlText: |-
+                                      =fnIconHtml(
+                                          ThisItem.Icon,
+                                          If(
+                                              ThisItem.Screen = App.ActiveScreen || (App.ActiveScreen = 'Request Detail Screen' && ThisItem.Screen = 'My Requests Screen') || (App.ActiveScreen = 'Agent Request Detail Screen' && ThisItem.Screen = 'Queue Screen') || (App.ActiveScreen = 'New Request Screen' && ThisItem.Screen = 'Portal Home Screen'),
+                                              nfThemeText,
+                                              nfThemeMutedText
+                                          ),
+                                          Min(Self.Width, Self.Height) - 4
+                                      )
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Width: =nfFontSizeCardTitle*2
+                                    X: =10
+                                    Y: =Parent.Height/2-Self.Height/2
+                              - btnMenuSelect:
+                                  Control: Classic/Button@2.2.0
+                                  Properties:
+                                    BorderColor: =RGBA(0, 0, 0, 0)
+                                    BorderStyle: =BorderStyle.None
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                    DisabledColor: =RGBA(161, 159, 157, 1)
+                                    DisabledFill: =RGBA(242, 242, 241, 0)
+                                    Fill: =RGBA(0, 0, 0, 0)
+                                    Font: =Font.'Segoe UI'
+                                    Height: =Parent.Height
+                                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                                    HoverColor: =RGBA(255, 255, 255, 1)
+                                    HoverFill: =RGBA(0, 0, 0, 0)
+                                    OnSelect: =Navigate(ThisItem.Screen,ScreenTransition.Fade)
+                                    PressedBorderColor: =RGBA(0, 69, 120, 1)
+                                    PressedColor: =RGBA(255, 255, 255, 1)
+                                    PressedFill: =RGBA(0, 0, 0, 0)
+                                    RadiusBottomLeft: =0
+                                    RadiusBottomRight: =0
+                                    RadiusTopLeft: =0
+                                    RadiusTopRight: =0
+                                    Text: =
+                                    Width: =Parent.Width
+                        - conSection:
+                            Control: GroupContainer@1.5.0
+                            Variant: ManualLayout
+                            Properties:
+                              DropShadow: =DropShadow.None
+                              Height: =nfButtonHeight
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Visible: =ThisItem.IsSection
+                              Width: =Parent.TemplateWidth
+                            Children:
+                              - recSectionDivider:
+                                  Control: Rectangle@2.3.0
+                                  Properties:
+                                    BorderColor: =RGBA(0, 0, 0, 0)
+                                    BorderStyle: =BorderStyle.None
+                                    BorderThickness: =2
+                                    DisabledFill: =RGBA(161, 159, 157, 1)
+                                    Fill: =nfThemeHover
+                                    FocusedBorderThickness: =4
+                                    Height: =1
+                                    HoverFill: =RGBA(0, 120, 212, 1)
+                                    PressedFill: =RGBA(0, 120, 212, 1)
+                                    Width: =Parent.Width-(Self.X*2)
+                                    X: =nfPagePadding/2
+                                    Y: =((Parent.Height-Self.Height)/2)+(nfPagePadding/2)
+                              - lblNavSectionHeader:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    BorderColor: =RGBA(0, 0, 0, 0)
+                                    BorderStyle: =BorderStyle.None
+                                    BorderThickness: =2
+                                    Color: =nfThemePrimary
+                                    DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                                    DisabledColor: =RGBA(161, 159, 157, 1)
+                                    FocusedBorderThickness: =4
+                                    Font: =nfAppFont
+                                    Height: =Parent.Height
+                                    PaddingBottom: =0
+                                    PaddingTop: =nfPagePadding
+                                    Size: =nfFontSizeSmall
+                                    Text: =Upper(ThisItem.Title)
+                                    Width: =Parent.Width-Self.X
+                                    X: =nfPagePadding/2
+                  - imgLogo:
+                      Control: Image@2.2.3
+                      Properties:
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        DisabledBorderColor: =RGBA(0, 0, 0, 0)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        FocusedBorderThickness: =4
+                        HoverBorderColor: =RGBA(0, 0, 0, 0)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Image: =nfThemeLogo
+                        ImagePosition: =cmpNav.Configuration.LogoPosition
+                        PaddingBottom: =cmpNav.Configuration.LogoPadding
+                        PaddingLeft: =cmpNav.Configuration.LogoPadding
+                        PaddingRight: =cmpNav.Configuration.LogoPadding
+                        PaddingTop: =cmpNav.Configuration.LogoPadding
+                        PressedBorderColor: =RGBA(0, 0, 0, 0)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Width: =Parent.Width
+                        Y: =Parent.Height-Self.Height

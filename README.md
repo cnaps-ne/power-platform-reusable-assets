@@ -10,6 +10,7 @@ This repository contains no tenant-specific URLs, IDs, credentials, branding, bu
 - `references/CATALOGUE.md` — copied, adapted and reference-only assets with provenance.
 - `sharepoint/README.md` — expected internal columns and installation notes.
 - `power-apps/README.md` — paste-code workflow, dependencies and import risks.
+- `power-apps/components/canvas-native/README.md` — 20 native Canvas components and their integration requirements.
 - `THIRD_PARTY_NOTICES.md` — licences and attribution.
 
 ## Structure

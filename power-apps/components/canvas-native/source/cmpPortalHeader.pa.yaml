@@ -1,0 +1,606 @@
+# ************************************************************************************************
+# Warning: YAML source code for Canvas Apps should only be used to review changes made within Power Apps Studio and for minor edits (Preview).
+# Use the maker portal to create and edit your Power Apps.
+#
+# The schema file for Canvas Apps is available at https://go.microsoft.com/fwlink/?linkid=2304907
+#
+# For more information, visit https://go.microsoft.com/fwlink/?linkid=2292623
+# ************************************************************************************************
+ComponentDefinitions:
+  cmpPortalHeader:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      HasNotifications:
+        PropertyKind: Input
+        DisplayName: Has Notifications
+        Description: Show a notification dot when there is no count
+        DataType: Boolean
+        Default: =false
+      Logo:
+        PropertyKind: Input
+        DisplayName: Logo
+        Description: Logo displayed at the left of the header
+        DataType: Image
+        Default: =nfThemeLogo
+      Menu:
+        PropertyKind: Input
+        DisplayName: Menu
+        Description: Navigation menu shared with the sidebar
+        DataType: Table
+        Default: =nfNavMenu
+      NotificationCount:
+        PropertyKind: Input
+        DisplayName: Notification Count
+        Description: Number of unread notifications
+        DataType: Number
+        Default: =0
+      OnNotificationSelect:
+        PropertyKind: Event
+        DisplayName: On Notification Select
+        Description: Action when the notification bell is selected
+        ReturnType: None
+        Default: =false
+    Properties:
+      Height: =nfHeaderHeight
+      Width: =App.Width
+    Children:
+      - conPortalHeader:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            DropShadow: =DropShadow.None
+            Fill: =nfThemeBackground
+            Height: =Parent.Height
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Width: =Parent.Width
+          Children:
+            - htmlPortalHeaderBackground:
+                Control: HtmlViewer@2.1.0
+                Properties:
+                  Font: =nfAppFont
+                  Height: =Parent.Height
+                  HtmlText: =fnSurfaceGradient(nfThemeSurface, 1, 1, 20)
+                  PaddingBottom: =0
+                  PaddingLeft: =0
+                  PaddingRight: =0
+                  PaddingTop: =0
+                  Width: =Parent.Width
+            - conPortalHeaderRow:
+                Control: GroupContainer@1.5.0
+                Variant: AutoLayout
+                Properties:
+                  DropShadow: =DropShadow.None
+                  Height: =Parent.Height - 1
+                  LayoutAlignItems: =LayoutAlignItems.Center
+                  LayoutDirection: =LayoutDirection.Horizontal
+                  LayoutGap: =If(cmpPortalHeader.Width < 700, nfPagePadding / 3, nfPagePadding / 2)
+                  LayoutOverflowX: =LayoutOverflow.Scroll
+                  PaddingBottom: =nfPagePadding / 2
+                  PaddingLeft: =nfPagePadding / 2
+                  PaddingRight: =nfPagePadding / 2
+                  PaddingTop: =nfPagePadding / 2
+                  RadiusBottomLeft: =0
+                  RadiusBottomRight: =0
+                  RadiusTopLeft: =0
+                  RadiusTopRight: =0
+                  Width: =Parent.Width
+                Children:
+                  - conPortalLogo:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =Parent.Height - Parent.PaddingTop - Parent.PaddingBottom
+                        LayoutMaxWidth: =nfNavWidth
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =Self.Height*4
+                      Children:
+                        - imgPortalLogo:
+                            Control: Image@2.2.3
+                            Properties:
+                              AccessibleLabel: ="Application logo"
+                              Height: =Parent.Height
+                              Image: =cmpPortalHeader.Logo
+                              ImagePosition: =ImagePosition.Fill
+                              Width: =Parent.Width
+                        - htmlAppTitle_1:
+                            Control: HtmlViewer@2.1.0
+                            Properties:
+                              DisabledBorderColor: =RGBA(161, 159, 157, 1)
+                              Font: =nfAppFont
+                              Height: =nfHeaderHeight
+                              HtmlText: |-
+                                =$"<div style='
+                                    background: linear-gradient(118deg, {Substitute(JSON(ColorFade(nfThemePrimary,If(gblDarkMode,60%,-40%))),"""","")}, {nfThemePrimaryText} 80%);
+                                    background-clip: text;
+                                    -webkit-background-clip: text;
+                                    -moz-background-clip: text;
+                                    -webkit-text-fill-color: transparent;
+                                    -moz-text-fill-color: transparent;
+                                    font-weight: 500;
+                                    display: flex;
+                                    flex-direction: row;
+                                    align-items: center;
+                                    justify-content: center;
+                                    text-align: center;
+                                    width: {Self.Width}px;
+                                    height: {Self.Height-1}px;
+                                '>{nfAppTitle}</div>"
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0 //nfPagePadding/2
+                              Size: =nfFontSizeHero
+                              Visible: =IsBlank(cmpPortalHeader.Logo)
+                              Width: =Parent.Width
+                  - Rectangle1:
+                      Control: Rectangle@2.3.0
+                      Properties:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        BorderColor: =RGBA(0, 0, 0, 0)
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =2
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        DisplayMode: =DisplayMode.Disabled
+                        Fill: =RGBA(0, 0, 0, 0)
+                        FocusedBorderThickness: =4
+                        HoverFill: =RGBA(0, 120, 212, 1)
+                        LayoutMinHeight: =16
+                        LayoutMinWidth: =16
+                        PressedFill: =RGBA(0, 120, 212, 1)
+                        Width: =nfPagePadding/2
+                  - conPortalNavigation:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =3
+                        Height: =Parent.Height - Parent.PaddingTop - Parent.PaddingBottom
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =100
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                      Children:
+                        - galPortalHeaderTabs:
+                            Control: Gallery@2.15.0
+                            Variant: Horizontal
+                            Properties:
+                              AccessibleLabel: ="Portal navigation"
+                              Height: =Parent.Height
+                              Items: |-
+                                =AddColumns(
+                                    SortByColumns(
+                                        Filter(
+                                            cmpPortalHeader.Menu,
+                                            Group = "User Portal" && !IsSection
+                                        ),
+                                        "SortOrder",
+                                        SortOrder.Ascending
+                                    ),
+                                    HeaderTabActive,
+                                    ThisRecord.Screen = App.ActiveScreen ||
+                                    (
+                                        App.ActiveScreen = 'Request Detail Screen' &&
+                                        ThisRecord.Screen = 'My Requests Screen'
+                                    ) ||
+                                    (
+                                        App.ActiveScreen = 'Agent Request Detail Screen' &&
+                                        ThisRecord.Screen = 'Queue Screen'
+                                    ) ||
+                                    (
+                                        App.ActiveScreen = 'New Request Screen' &&
+                                        ThisRecord.Screen = 'Portal Home Screen'
+                                    )
+                                )
+                              OnSelect: =Navigate(ThisItem.Screen, ScreenTransition.Fade)
+                              TemplatePadding: =0
+                              TemplateSize: =Self.Width/Max(Self.AllItemsCount,5)
+                              Width: =Parent.Width
+                            Children:
+                              - conPortalHeaderTabs:
+                                  Control: GroupContainer@1.5.0
+                                  Variant: ManualLayout
+                                  Properties:
+                                    BorderColor: =ColorValue(nfThemePrimaryText & "11")
+                                    BorderStyle: =BorderStyle.None
+                                    BorderThickness: =2
+                                    DropShadow: =If(ThisItem.HeaderTabActive, DropShadow.Light, DropShadow.None)
+                                    Height: =Parent.Height - (Self.Y*2)
+                                    RadiusBottomLeft: =nfCardRadius
+                                    RadiusBottomRight: =nfCardRadius
+                                    RadiusTopLeft: =nfCardRadius
+                                    RadiusTopRight: =nfCardRadius
+                                    Width: =Parent.TemplateWidth-(Self.X*2)
+                                    X: =4
+                                    Y: =4
+                                  Children:
+                                    - htmlPortalTabGlow:
+                                        Control: HtmlViewer@2.1.0
+                                        Properties:
+                                          Height: =Parent.Height+1
+                                          HtmlText: "=With(\n    {\n        _primary: nfThemePrimaryText,\n        _surface: nfThemeSurfaceText,\n        _inset: nfPagePadding / 4,\n        _bottom: nfPagePadding / 2\n    },\n    $\"\n    <div style='position:relative;height:{Max(0, Self.Height - 1)}px;overflow:hidden;background:{_surface};'>\n\n    <div style='position:absolute;left:1px;top:1px;width:{Parent.Width/5}px;background:radial-gradient(ellipse,{_primary},{_primary}22);'></div>\n\n    <div style='position:absolute;inset:0;background:radial-gradient(ellipse,transparent,\" & _primary & \"11);opacity:0.5;border-radius:999px'></div>\n    \n    <div style='position:absolute;inset:0;box-shadow:inset 0 0 3px \" & _primary & $\";opacity:0.2;'></div>\n    \n    <div style='position:absolute;left:0;right:0;top:{Parent.Height - 15}px;height:30px;border-radius:100px;background:radial-gradient(ellipse,{_primary}77 10%, {_primary}33 40%, {_primary}11 60%, transparent)'></div>\n    \n    <div style='position:absolute;left:1px;right:0;top:-15px;height:30px;width:{Parent.Width*0.8}px;background:radial-gradient(ellipse,{_primary}22 10%, {_primary}15 30%, {_primary}11 50%, transparent 90%)'></div>\n    \n    <div style='position:absolute;left:0;right:0;bottom:0px;height:2px;background:linear-gradient(90deg,{_primary}55,{_primary}FF, {_primary}55),linear-gradient(180deg,{_primary}AA,{_surface}, {_primary}AA);   box-shadow: 0px 0px 3px 0px   {nfThemePrimaryText};'>\n    \n    </div>\n    \n    </div>\n    \"\n)"
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          Visible: =ThisItem.HeaderTabActive
+                                          Width: =Parent.Width
+                                    - conPortalHeaderTabItems:
+                                        Control: GroupContainer@1.5.0
+                                        Variant: AutoLayout
+                                        Properties:
+                                          Height: =Parent.Height
+                                          LayoutAlignItems: =LayoutAlignItems.Center
+                                          LayoutDirection: =LayoutDirection.Horizontal
+                                          PaddingLeft: =nfPagePadding/4
+                                          Width: =Parent.Width
+                                        Children:
+                                          - htmlPortalTabIcon:
+                                              Control: HtmlViewer@2.1.0
+                                              Properties:
+                                                AlignInContainer: =AlignInContainer.Center
+                                                Height: =Parent.Height - (nfPagePadding/2)
+                                                HtmlText: |-
+                                                  =fnIconHtml(
+                                                      ThisItem.Icon,
+                                                      If(
+                                                          ThisItem.HeaderTabActive && gblDarkMode,
+                                                          nfThemePrimary,
+                                                          nfThemeMutedText
+                                                      ),
+                                                      Max(0, Self.Height - nfPagePadding / 4)
+                                                  )
+                                                PaddingBottom: =0
+                                                PaddingLeft: =0
+                                                PaddingRight: =0
+                                                PaddingTop: =0
+                                                Width: =Self.Height
+                                                X: =nfPagePadding
+                                                Y: =
+                                          - lblPortalTabTitle:
+                                              Control: Label@2.5.1
+                                              Properties:
+                                                AlignInContainer: =AlignInContainer.Stretch
+                                                Color: |-
+                                                  =If(
+                                                          ThisItem.HeaderTabActive && gblDarkMode,
+                                                          nfThemePrimary,
+                                                          nfThemeMutedText
+                                                      )
+                                                FillPortions: =4
+                                                Font: =nfAppFont
+                                                FontWeight: =If(ThisItem.HeaderTabActive, FontWeight.Semibold, FontWeight.Normal)
+                                                Height: =
+                                                LayoutMinHeight: =0
+                                                LayoutMinWidth: =0
+                                                PaddingBottom: =0
+                                                PaddingLeft: =nfPagePadding / 4
+                                                PaddingRight: =0
+                                                PaddingTop: =0
+                                                Size: =nfFontSizeSmall
+                                                Text: =ThisItem.Title
+                                                Width: =
+                                                Wrap: =false
+                                                X: =htmlPortalTabIcon.X + htmlPortalTabIcon.Width
+                                                Y: =nfPagePadding / 4
+                                    - btnPortalHeaderTab:
+                                        Control: Classic/Button@2.2.0
+                                        Properties:
+                                          BorderColor: =Color.Transparent
+                                          BorderThickness: =0
+                                          Color: =Color.Transparent
+                                          Fill: =Color.Transparent
+                                          FocusedBorderColor: =nfThemePrimary
+                                          FocusedBorderThickness: =2
+                                          Font: =nfAppFont
+                                          FontWeight: =FontWeight.Bold
+                                          Height: =Parent.Height
+                                          HoverBorderColor: =Color.Transparent
+                                          HoverColor: =Color.Transparent
+                                          HoverFill: =If(gblDarkMode, RGBA(255, 255, 255, 0.05), RGBA(0, 0, 0, 0.04))
+                                          OnSelect: =Navigate(ThisItem.Screen, ScreenTransition.Fade)
+                                          PaddingBottom: =0
+                                          PaddingLeft: =0
+                                          PaddingRight: =0
+                                          PaddingTop: =0
+                                          PressedBorderColor: =nfThemePrimary
+                                          PressedColor: =Color.Transparent
+                                          PressedFill: =If(gblDarkMode, RGBA(255, 255, 255, 0.09), RGBA(0, 0, 0, 0.07))
+                                          RadiusBottomLeft: =18
+                                          RadiusBottomRight: =18
+                                          RadiusTopLeft: =18
+                                          RadiusTopRight: =18
+                                          Text: =""
+                                          Tooltip: =ThisItem.Title & If(ThisItem.HeaderTabActive, " (current section)", "")
+                                          Width: =Parent.Width
+                  - conPortalNotifications:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        BorderColor: =nfThemeBorder
+                        BorderThickness: =1
+                        DropShadow: =DropShadow.Semilight
+                        Fill: =nfThemeSurface
+                        FillPortions: =0
+                        Height: =nfButtonHeight
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =100
+                        RadiusBottomRight: =100
+                        RadiusTopLeft: =100
+                        RadiusTopRight: =100
+                        Width: =Self.Height
+                      Children:
+                        - htmlPortalNotificationGlow:
+                            Control: HtmlViewer@2.1.0
+                            Properties:
+                              Height: =Parent.Height
+                              HtmlText: |-
+                                =With(
+                                    {_primary: Substitute(JSON(nfThemePrimary), """", "")},
+                                    "<div style='position:relative;width:" &
+                                    Text(Self.Width, "0.##", "en-US") &
+                                    "px;height:" &
+                                    Text(Self.Height, "0.##", "en-US") &
+                                    "px;border-radius:100px;overflow:hidden;'>" &
+                                    "<div style='position:absolute;inset:0;background:radial-gradient(ellipse at 50% 100%," &
+                                    _primary & ",transparent 75%);opacity:0.45;'></div>" &
+                                    "<div style='position:absolute;left:20%;right:20%;bottom:2px;height:2px;border-radius:100px;background:" &
+                                    _primary & ";box-shadow:0 -2px 8px 2px " &
+                                    _primary & ";'></div></div>"
+                                )
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Width: =Self.Height
+                        - imgPortalBell:
+                            Control: Image@2.2.3
+                            Properties:
+                              AccessibleLabel: ="Notifications"
+                              Height: =Max(0, Parent.Height - nfPagePadding)
+                              Image: |-
+                                ="data:image/svg+xml;utf8," &
+                                EncodeUrl(
+                                    "<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='" &
+                                    Substitute(JSON(nfThemePrimary), """", "") &
+                                    "' stroke-width='1.8' stroke-linecap='round' stroke-linejoin='round'>" &
+                                    "<path d='M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9'/>" &
+                                    "<path d='M10 21h4'/></svg>"
+                                )
+                              Width: =Self.Height
+                              X: =(Parent.Width - Self.Width) / 2
+                              Y: =(Parent.Height - Self.Height) / 2
+                        - conPortalNotificationBadge:
+                            Control: GroupContainer@1.5.0
+                            Variant: ManualLayout
+                            Properties:
+                              BorderColor: =nfThemeSurface
+                              BorderThickness: =1
+                              DropShadow: =DropShadow.None
+                              Fill: =nfThemePrimary
+                              Height: =If(cmpPortalHeader.NotificationCount > 0, 17, 9)
+                              RadiusBottomLeft: =100
+                              RadiusBottomRight: =100
+                              RadiusTopLeft: =100
+                              RadiusTopRight: =100
+                              Visible: =cmpPortalHeader.HasNotifications || cmpPortalHeader.NotificationCount > 0
+                              Width: =If(cmpPortalHeader.NotificationCount > 99, 25, If(cmpPortalHeader.NotificationCount > 9, 21, Self.Height))
+                              X: =Parent.Width - Self.Width - nfPagePadding / 8
+                              Y: =nfPagePadding / 8
+                            Children:
+                              - lblPortalNotificationCount:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    Align: =Align.Center
+                                    Color: =RGBA(255, 255, 255, 1)
+                                    Font: =nfAppFont
+                                    FontWeight: =FontWeight.Bold
+                                    Height: =Parent.Height
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =8
+                                    Text: =If(cmpPortalHeader.NotificationCount > 99, "99+", Text(cmpPortalHeader.NotificationCount, "0"))
+                                    Visible: =cmpPortalHeader.NotificationCount > 0
+                                    Width: =Parent.Width
+                        - btnPortalNotifications:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =Color.Transparent
+                              BorderThickness: =0
+                              Color: =Color.Transparent
+                              Fill: =Color.Transparent
+                              FocusedBorderColor: =nfThemePrimary
+                              FocusedBorderThickness: =2
+                              Font: =nfAppFont
+                              Height: =Parent.Height
+                              HoverBorderColor: =Color.Transparent
+                              HoverColor: =Color.Transparent
+                              HoverFill: =If(gblDarkMode, RGBA(255, 255, 255, 0.08), RGBA(0, 0, 0, 0.05))
+                              OnSelect: =cmpPortalHeader.OnNotificationSelect()
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              PressedBorderColor: =nfThemePrimary
+                              PressedColor: =Color.Transparent
+                              PressedFill: =If(gblDarkMode, RGBA(255, 255, 255, 0.12), RGBA(0, 0, 0, 0.08))
+                              RadiusBottomLeft: =100
+                              RadiusBottomRight: =100
+                              RadiusTopLeft: =100
+                              RadiusTopRight: =100
+                              Text: =""
+                              Tooltip: =If(cmpPortalHeader.NotificationCount > 0, "Notifications (" & Text(cmpPortalHeader.NotificationCount, "0") & " unread)", If(cmpPortalHeader.HasNotifications, "Unread notifications", "Notifications"))
+                              Width: =Self.Height
+                  - conPortalDarkMode:
+                      Control: GroupContainer@1.5.0
+                      Variant: ManualLayout
+                      Properties:
+                        BorderColor: =nfThemeBorder
+                        BorderThickness: =1
+                        DropShadow: =DropShadow.Semilight
+                        Fill: =nfThemeSurface
+                        FillPortions: =0
+                        Height: =nfButtonHeight
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        RadiusBottomLeft: =100
+                        RadiusBottomRight: =100
+                        RadiusTopLeft: =100
+                        RadiusTopRight: =100
+                        Width: =Self.Height
+                      Children:
+                        - htmlPortalDarkMode:
+                            Control: HtmlViewer@2.1.0
+                            Properties:
+                              Height: =Max(0, Parent.Height - nfPagePadding)
+                              HtmlText: =fnIconHtml(If(gblDarkMode, "LightMode", "DarkMode"), nfThemeText, Max(0, Self.Height - nfPagePadding / 8))
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              Width: =Self.Height
+                              X: =(Parent.Width - Self.Width) / 2
+                              Y: =(Parent.Height - Self.Height) / 2
+                        - btnPortalToggleDarkMode:
+                            Control: Classic/Button@2.2.0
+                            Properties:
+                              BorderColor: =Color.Transparent
+                              BorderThickness: =0
+                              Color: =Color.Transparent
+                              Fill: =Color.Transparent
+                              FocusedBorderColor: =nfThemePrimary
+                              FocusedBorderThickness: =2
+                              Font: =nfAppFont
+                              Height: =Parent.Height
+                              HoverBorderColor: =Color.Transparent
+                              HoverColor: =Color.Transparent
+                              HoverFill: =If(gblDarkMode, RGBA(255, 255, 255, 0.08), RGBA(0, 0, 0, 0.05))
+                              OnSelect: =Set(gblDarkMode, !gblDarkMode)
+                              PaddingBottom: =0
+                              PaddingLeft: =0
+                              PaddingRight: =0
+                              PaddingTop: =0
+                              PressedBorderColor: =nfThemePrimary
+                              PressedColor: =Color.Transparent
+                              PressedFill: =If(gblDarkMode, RGBA(255, 255, 255, 0.12), RGBA(0, 0, 0, 0.08))
+                              RadiusBottomLeft: =100
+                              RadiusBottomRight: =100
+                              RadiusTopLeft: =100
+                              RadiusTopRight: =100
+                              Text: =""
+                              Tooltip: =If(gblDarkMode, "Switch to light mode", "Switch to dark mode")
+                              Width: =Self.Height
+                  - conPortalProfile:
+                      Control: GroupContainer@1.5.0
+                      Variant: AutoLayout
+                      Properties:
+                        DropShadow: =DropShadow.None
+                        FillPortions: =0
+                        Height: =Parent.Height - Parent.PaddingTop - Parent.PaddingBottom
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutDirection: =LayoutDirection.Horizontal
+                        LayoutGap: =nfPagePadding / 2
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =0
+                        LayoutMinWidth: =0
+                        PaddingBottom: =nfPagePadding / 4
+                        PaddingLeft: =nfPagePadding / 4
+                        PaddingRight: =nfPagePadding / 4
+                        PaddingTop: =nfPagePadding / 4
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Width: =If(cmpPortalHeader.Width < 1100, 40 + Self.PaddingLeft + Self.PaddingRight, 230 + Self.PaddingLeft + Self.PaddingRight)
+                      Children:
+                        - imgPortalUser:
+                            Control: Image@2.2.3
+                            Properties:
+                              AccessibleLabel: =User().FullName
+                              BorderColor: =nfThemeBorder
+                              BorderThickness: =1
+                              Height: =40
+                              Image: =User().Image
+                              ImagePosition: =ImagePosition.Fill
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              RadiusBottomLeft: =100
+                              RadiusBottomRight: =100
+                              RadiusTopLeft: =100
+                              RadiusTopRight: =100
+                              Width: =Self.Height
+                        - conPortalProfileDetails:
+                            Control: GroupContainer@1.5.0
+                            Variant: AutoLayout
+                            Properties:
+                              DropShadow: =DropShadow.None
+                              Height: =Parent.Height - Parent.PaddingTop - Parent.PaddingBottom
+                              LayoutAlignItems: =LayoutAlignItems.Center
+                              LayoutDirection: =LayoutDirection.Vertical
+                              LayoutJustifyContent: =LayoutJustifyContent.Center
+                              LayoutMinHeight: =0
+                              LayoutMinWidth: =0
+                              RadiusBottomLeft: =0
+                              RadiusBottomRight: =0
+                              RadiusTopLeft: =0
+                              RadiusTopRight: =0
+                              Visible: =cmpPortalHeader.Width >= 1100
+                            Children:
+                              - lblPortalUser:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    Color: =nfThemeText
+                                    Font: =nfAppFont
+                                    FontWeight: =FontWeight.Semibold
+                                    Height: =Parent.Height / 2
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =nfFontSizeSmall
+                                    Text: =User().FullName
+                                    Tooltip: =User().FullName
+                                    Width: =Parent.Width
+                                    Wrap: =false
+                              - lblPortalRole:
+                                  Control: Label@2.5.1
+                                  Properties:
+                                    Color: =nfThemeMutedText
+                                    Font: =nfAppFont
+                                    Height: =Parent.Height / 2
+                                    LayoutMinHeight: =0
+                                    LayoutMinWidth: =0
+                                    PaddingBottom: =0
+                                    PaddingLeft: =0
+                                    PaddingRight: =0
+                                    PaddingTop: =0
+                                    Size: =nfFontSizeTiny
+                                    Text: =If(gblIsAdmin, "System Administrator", "Basic User")
+                                    Width: =Parent.Width
+                                    Wrap: =false
+            - recPortalHeaderBorder:
+                Control: Rectangle@2.3.0
+                Properties:
+                  DisabledFill: =nfThemeBorder
+                  DisplayMode: =DisplayMode.Disabled
+                  Fill: =nfThemeBorder
+                  Height: =1
+                  Width: =Parent.Width
+                  Y: =Parent.Height - Self.Height

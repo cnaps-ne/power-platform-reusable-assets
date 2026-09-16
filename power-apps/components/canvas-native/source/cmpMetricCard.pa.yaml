@@ -1,0 +1,155 @@
+# Canvas component source. Review and test in Power Apps Studio before production use.
+ComponentDefinitions:
+  cmpMetricCard:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      LabelText:
+        PropertyKind: Input
+        DisplayName: LabelText
+        Description: Metric name.
+        DataType: Text
+        Default: |-
+          ="Open requests"
+      ValueText:
+        PropertyKind: Input
+        DisplayName: ValueText
+        Description: Preformatted value; may be an em dash when unavailable.
+        DataType: Text
+        Default: |-
+          ="0"
+      ScopeText:
+        PropertyKind: Input
+        DisplayName: ScopeText
+        Description: Define what the number covers.
+        DataType: Text
+        Default: |-
+          ="Loaded requests"
+    Properties:
+      Width: |-
+        =280
+      Height: |-
+        =158
+    Children:
+      - cmpMetricCardBox:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =Parent.Height
+            Fill: |-
+              =nfThemeSurface
+            BorderColor: |-
+              =nfThemeBorder
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =18
+            RadiusTopRight: |-
+              =18
+            RadiusBottomLeft: |-
+              =18
+            RadiusBottomRight: |-
+              =18
+          Children:
+            - cmpMetricCardLabel:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpMetricCard.LabelText
+                  X: |-
+                    =20
+                  Y: |-
+                    =17
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =24
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeMutedText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpMetricCardValue:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpMetricCard.ValueText
+                  X: |-
+                    =20
+                  Y: |-
+                    =51
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =51
+                  Size: |-
+                    =34
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =nfThemeText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpMetricCardScope:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpMetricCard.ScopeText
+                  X: |-
+                    =20
+                  Y: |-
+                    =116
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =23
+                  Size: |-
+                    =9
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeMutedText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true

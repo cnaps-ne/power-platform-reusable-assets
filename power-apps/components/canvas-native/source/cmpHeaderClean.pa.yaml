@@ -1,0 +1,288 @@
+# Canvas component source. Review and test in Power Apps Studio before production use.
+ComponentDefinitions:
+  cmpHeaderClean:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      PageTitle:
+        PropertyKind: Input
+        DisplayName: PageTitle
+        Description: Same PageTitle input and default as cmpHeader.
+        DataType: Text
+        Default: |-
+          =Substitute(App.ActiveScreen.Name," Screen","")
+    Properties:
+      Width: |-
+        =App.Width-nfNavWidth
+      Height: |-
+        =nfHeaderHeight
+    Children:
+      - cmpHeaderCleanSurface:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =Parent.Height
+            Fill: |-
+              =nfThemeSurface
+            BorderColor: |-
+              =nfThemeBorder
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =0
+            RadiusTopRight: |-
+              =0
+            RadiusBottomLeft: |-
+              =0
+            RadiusBottomRight: |-
+              =0
+          Children:
+            - cmpHeaderCleanEyebrow:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    ="WORKSPACE"
+                  X: |-
+                    =22
+                  Y: |-
+                    =10
+                  Width: |-
+                    =Parent.Width-375
+                  Height: |-
+                    =17
+                  Size: |-
+                    =8
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =nfThemePrimary
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpHeaderCleanTitle:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpHeaderClean.PageTitle
+                  X: |-
+                    =22
+                  Y: |-
+                    =29
+                  Width: |-
+                    =Parent.Width-375
+                  Height: |-
+                    =31
+                  Size: |-
+                    =18
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =nfThemeText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpHeaderCleanModeIcon:
+                Control: HtmlViewer@2.1.0
+                Properties:
+                  X: |-
+                    =Parent.Width-298
+                  Y: |-
+                    =20
+                  Width: |-
+                    =27
+                  Height: |-
+                    =27
+                  HtmlText: |-
+                    =fnIconHtml(Coalesce(LookUp(nfIconLibrary,Name=If(gblDarkMode,"LightMode","DarkMode"),Name),"General"),nfThemeText,23)
+                  Font: |-
+                    =Font.'Segoe UI'
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+            - cmpHeaderCleanToggle:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Text: |-
+                    =""
+                  OnSelect: |-
+                    =Set(gblDarkMode,!gblDarkMode)
+                  X: |-
+                    =Parent.Width-306
+                  Y: |-
+                    =14
+                  Width: |-
+                    =40
+                  Height: |-
+                    =44
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Fill: |-
+                    =Color.Transparent
+                  Color: |-
+                    =nfThemeText
+                  BorderColor: |-
+                    =Color.Transparent
+                  BorderThickness: |-
+                    =1
+                  HoverFill: |-
+                    =nfThemeHover
+                  HoverColor: |-
+                    =nfThemeText
+                  PressedFill: |-
+                    =ColorFade(nfThemePrimary,-10%)
+                  PressedColor: |-
+                    =ColorValue("#241600")
+                  FocusedBorderThickness: |-
+                    =3
+                  RadiusTopLeft: |-
+                    =12
+                  RadiusTopRight: |-
+                    =12
+                  RadiusBottomLeft: |-
+                    =12
+                  RadiusBottomRight: |-
+                    =12
+                  Tooltip: |-
+                    ="Toggle light or dark mode"
+            - cmpHeaderCleanAvatar:
+                Control: Image@2.2.3
+                Properties:
+                  Image: |-
+                    =User().Image
+                  ImagePosition: |-
+                    =ImagePosition.Fill
+                  AccessibleLabel: |-
+                    =User().FullName
+                  X: |-
+                    =Parent.Width-244
+                  Y: |-
+                    =19
+                  Width: |-
+                    =34
+                  Height: |-
+                    =34
+                  RadiusTopLeft: |-
+                    =100
+                  RadiusTopRight: |-
+                    =100
+                  RadiusBottomLeft: |-
+                    =100
+                  RadiusBottomRight: |-
+                    =100
+                  BorderColor: |-
+                    =nfThemeBorder
+                  BorderThickness: |-
+                    =1
+            - cmpHeaderCleanPerson:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =User().FullName
+                  X: |-
+                    =Parent.Width-202
+                  Y: |-
+                    =18
+                  Width: |-
+                    =180
+                  Height: |-
+                    =20
+                  Size: |-
+                    =10
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =nfThemeText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpHeaderCleanIdentity:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =nfCurrentUserEmail
+                  X: |-
+                    =Parent.Width-202
+                  Y: |-
+                    =39
+                  Width: |-
+                    =180
+                  Height: |-
+                    =19
+                  Size: |-
+                    =9
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeMutedText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpHeaderCleanEdge:
+                Control: Rectangle@2.3.0
+                Properties:
+                  X: |-
+                    =0
+                  Y: |-
+                    =Parent.Height-2
+                  Width: |-
+                    =Parent.Width
+                  Height: |-
+                    =2
+                  Fill: |-
+                    =nfThemePrimary
+                  BorderThickness: |-
+                    =0

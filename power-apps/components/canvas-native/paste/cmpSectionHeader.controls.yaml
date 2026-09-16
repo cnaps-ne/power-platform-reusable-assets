@@ -1,0 +1,63 @@
+# Paste inside the new component after adding its custom properties.
+- cmpSectionHeaderTitle:
+    Control: Label@2.5.1
+    Properties:
+      Text: |-
+        =cmpSectionHeader.TitleText
+      X: |-
+        =0
+      Y: |-
+        =0
+      Width: |-
+        =Parent.Width
+      Height: |-
+        =36
+      Size: |-
+        =20
+      Font: |-
+        =Font.'Segoe UI'
+      FontWeight: |-
+        =FontWeight.Semibold
+      Color: |-
+        =nfThemeText
+      PaddingLeft: |-
+        =0
+      PaddingRight: |-
+        =0
+      PaddingTop: |-
+        =0
+      PaddingBottom: |-
+        =0
+      Wrap: |-
+        =true
+- cmpSectionHeaderSubtitle:
+    Control: Label@2.5.1
+    Properties:
+      Text: |-
+        =cmpSectionHeader.SubtitleText
+      X: |-
+        =0
+      Y: |-
+        =44
+      Width: |-
+        =Parent.Width
+      Height: |-
+        =34
+      Size: |-
+        =11
+      Font: |-
+        =Font.'Segoe UI'
+      FontWeight: |-
+        =FontWeight.Normal
+      Color: |-
+        =nfThemeMutedText
+      PaddingLeft: |-
+        =0
+      PaddingRight: |-
+        =0
+      PaddingTop: |-
+        =0
+      PaddingBottom: |-
+        =0
+      Wrap: |-
+        =true

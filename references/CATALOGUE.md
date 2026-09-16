@@ -33,6 +33,7 @@ Status meanings: **Copied** is an unmodified third-party source copy; **Adapted*
 | Empty/loading states | This library | — | Canvas YAML fragment | Professional wait and zero-result UX | MIT | Adapted | `power-apps/components/` |
 | Side panel | This library | — | Canvas YAML fragment | Non-navigating quick detail/actions | MIT | Adapted | `power-apps/dialogs/side-panel.controls.yaml` |
 | Request form frame | This library | — | Canvas YAML fragment | Fast submission form start | MIT | Adapted | `power-apps/forms/request-form-layout.controls.yaml` |
+| Native Canvas component collection | This library | — | Canvas component YAML | Headers, navigation, loading, activity, stepper, cards, pills and portal building blocks | MIT | Adapted | `power-apps/components/canvas-native/` |
 | Creator Kit | Microsoft | https://github.com/microsoft/powercat-creator-kit | Managed solution/component library | Fluent DetailsList, Command Bar, Dialog, Panel and Pivot patterns | MIT | Reference only | `references/REFERENCE-ONLY.md` |
 | Power CAT code components | Microsoft | https://github.com/microsoft/powercat-code-components | PCF controls | Advanced grids/navigation/Fluent controls | MIT | Reference only | `references/REFERENCE-ONLY.md` |
 | Power Apps Samples | Microsoft | https://github.com/microsoft/PowerApps-Samples | Samples | Broader official sample catalogue | MIT | Reference only | `references/REFERENCE-ONLY.md` |

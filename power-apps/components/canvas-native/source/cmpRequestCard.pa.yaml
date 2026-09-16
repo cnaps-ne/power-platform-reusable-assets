@@ -1,0 +1,247 @@
+# Canvas component source. Review and test in Power Apps Studio before production use.
+ComponentDefinitions:
+  cmpRequestCard:
+    DefinitionType: CanvasComponent
+    AccessAppScope: true
+    CustomProperties:
+      TitleText:
+        PropertyKind: Input
+        DisplayName: TitleText
+        Description: Request title.
+        DataType: Text
+        Default: |-
+          ="Request title"
+      ReferenceText:
+        PropertyKind: Input
+        DisplayName: ReferenceText
+        Description: RequestRef.
+        DataType: Text
+        Default: |-
+          ="REQ-000001"
+      StatusValue:
+        PropertyKind: Input
+        DisplayName: StatusValue
+        Description: Authoritative Status.
+        DataType: Text
+        Default: |-
+          ="New"
+      CategoryText:
+        PropertyKind: Input
+        DisplayName: CategoryText
+        Description: Category.
+        DataType: Text
+        Default: |-
+          ="IT"
+      OnOpen:
+        PropertyKind: Event
+        DisplayName: OnOpen
+        Description: Fires when Open request is selected; same Event shape as cmpStepper.OnStepSelect.
+        ReturnType: None
+        Default: |-
+          =false
+    Properties:
+      Width: |-
+        =380
+      Height: |-
+        =260
+    Children:
+      - cmpRequestCardBox:
+          Control: GroupContainer@1.5.0
+          Variant: ManualLayout
+          Properties:
+            X: |-
+              =0
+            Y: |-
+              =0
+            Width: |-
+              =Parent.Width
+            Height: |-
+              =Parent.Height
+            Fill: |-
+              =nfThemeSurface
+            BorderColor: |-
+              =nfThemeBorder
+            BorderThickness: |-
+              =1
+            DropShadow: |-
+              =DropShadow.None
+            RadiusTopLeft: |-
+              =18
+            RadiusTopRight: |-
+              =18
+            RadiusBottomLeft: |-
+              =18
+            RadiusBottomRight: |-
+              =18
+          Children:
+            - cmpRequestCardRef:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpRequestCard.ReferenceText
+                  X: |-
+                    =20
+                  Y: |-
+                    =16
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =21
+                  Size: |-
+                    =9
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeMutedText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpRequestCardTitle:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpRequestCard.TitleText
+                  X: |-
+                    =20
+                  Y: |-
+                    =49
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =47
+                  Size: |-
+                    =17
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =nfThemeText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpRequestCardCategory:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =cmpRequestCard.CategoryText
+                  X: |-
+                    =20
+                  Y: |-
+                    =114
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =24
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Normal
+                  Color: |-
+                    =nfThemeMutedText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpRequestCardProgress:
+                Control: Label@2.5.1
+                Properties:
+                  Text: |-
+                    =Coalesce(LookUp(nfStatuses,Status=cmpRequestCard.StatusValue,Progress),"Received")
+                  X: |-
+                    =20
+                  Y: |-
+                    =153
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =27
+                  Size: |-
+                    =12
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Color: |-
+                    =nfThemeText
+                  PaddingLeft: |-
+                    =0
+                  PaddingRight: |-
+                    =0
+                  PaddingTop: |-
+                    =0
+                  PaddingBottom: |-
+                    =0
+                  Wrap: |-
+                    =true
+            - cmpRequestCardOpen:
+                Control: Classic/Button@2.2.0
+                Properties:
+                  Text: |-
+                    ="Open request"
+                  OnSelect: |-
+                    =cmpRequestCard.OnOpen()
+                  X: |-
+                    =20
+                  Y: |-
+                    =201
+                  Width: |-
+                    =Parent.Width-40
+                  Height: |-
+                    =40
+                  Size: |-
+                    =11
+                  Font: |-
+                    =Font.'Segoe UI'
+                  FontWeight: |-
+                    =FontWeight.Semibold
+                  Fill: |-
+                    =nfThemeSurface
+                  Color: |-
+                    =nfThemeText
+                  BorderColor: |-
+                    =nfThemeBorder
+                  BorderThickness: |-
+                    =1
+                  HoverFill: |-
+                    =ColorFade(nfThemeSurface,If(gblDarkMode,12%,-5%))
+                  HoverColor: |-
+                    =nfThemeText
+                  PressedFill: |-
+                    =ColorFade(nfThemePrimary,-10%)
+                  PressedColor: |-
+                    =ColorValue("#241600")
+                  FocusedBorderThickness: |-
+                    =3
+                  RadiusTopLeft: |-
+                    =12
+                  RadiusTopRight: |-
+                    =12
+                  RadiusBottomLeft: |-
+                    =12
+                  RadiusBottomRight: |-
+                    =12
